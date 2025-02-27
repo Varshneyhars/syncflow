@@ -1,59 +1,37 @@
-import React from 'react';
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBIcon,
-  MDBInput,
-  MDBCheckbox
-}
-from 'mdb-react-ui-kit';
+import React from "react";
+import "./login.css"; // Importing CSS file
 
-function App() {
+function Login() {
   return (
-    <MDBContainer fluid className="p-3 my-5">
-
-      <MDBRow>
-
-        <MDBCol col='10' md='6'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image" />
-        </MDBCol>
-
-        <MDBCol col='4' md='6'>
-
-
-          <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
-
-
-          <div className="d-flex justify-content-between mx-4 mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="image-section">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+            alt="Login"
+          />
+        </div>
+        <div className="form-section">
+          <div className="logo">
+            <span className="icon">🟧</span> <h1>Logo</h1>
           </div>
-
-          <MDBBtn className="mb-4 w-100" size="lg">Sign in</MDBBtn>
-
-          <div className="divider d-flex align-items-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">OR</p>
+          <h2>Sign into your account</h2>
+          <form>
+            <input type="email" placeholder="Email address" required />
+            <input type="password" placeholder="Password" required />
+            <button type="submit">LOGIN</button>
+          </form>
+          <a href="#" className="forgot-password">Forgot password?</a>
+          <p className="register">
+            Don't have an account? <a href="#">Register here</a>
+          </p>
+          <div className="terms">
+            <a href="#">Terms of use</a> | <a href="#">Privacy policy</a>
           </div>
-
-          <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-            <MDBIcon fab icon="facebook-f" className="mx-2"/>
-            Continue with facebook
-          </MDBBtn>
-
-          <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#55acee'}}>
-            <MDBIcon fab icon="twitter" className="mx-2"/>
-            Continue with twitter
-          </MDBBtn>
-
-        </MDBCol>
-
-      </MDBRow>
-
-    </MDBContainer>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default App;
+export default Login;
