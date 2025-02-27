@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import './App.css';
 import Tasks from "./tasks";
 import AddTask from "./AddTask";
+import ManageUsers from './ManageUsers'; // Import the ManageUsers component
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="tasks" element={<Tasks />} />
+              <Route path="manage-users" element={<ManageUsers />} />
             </Route>
 
             {/* Fallback route for 404 */}
