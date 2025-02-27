@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import './App.css';
 import Tasks from "./tasks";
 import AddTask from "./AddTask";
+import TeamChat from "./TeamChat"
 
 function App() {
   return (
@@ -22,8 +23,6 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/add-task" element={<AddTask />} />
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
 
@@ -35,12 +34,14 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="tasks" element={<Tasks />} />
+              <Route path="chat" element={<TeamChat />} /> {/* Team Chat Route */}
             </Route>
 
             {/* Fallback route for 404 */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>
+
       </Router>
     </Auth0Provider>
   );
