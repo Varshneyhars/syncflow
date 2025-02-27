@@ -7,6 +7,7 @@ import Dashboard from './dashboard';
 import Layout from './components/Layout';
 import Tasks from "./tasks";
 import TeamChat from "./TeamChat"; // ✅ Import the TeamChat component
+import ManageUsers from './ManageUsers';
 import './App.css';
 
 function App() {
