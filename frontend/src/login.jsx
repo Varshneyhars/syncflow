@@ -32,6 +32,7 @@ function Login() {
       setLoggedIn(true);
       setUserData(response.data);
       setError("");
+      navigate("/dashboard"); // Redirect to dashboard on successful login
     } catch (err) {
       setError("Invalid email or password");
     }
