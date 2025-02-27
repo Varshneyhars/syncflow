@@ -19,15 +19,10 @@ const Layout = () => {
         <div className="d-flex vh-100">
             {/* Sidebar */}
             <nav className={`sidebar bg-dark-navy transition-all ${collapsed ? 'collapsed' : ''}`}>
-                <div className="sidebar-header d-flex justify-content-between align-items-center p-3 border-bottom border-dark">
-                    {!collapsed && <h2 className="text-gradient m-0 fw-bold">MyApp</h2>}
-                    <button 
-                        className="btn btn-outline-light border-0" 
-                        onClick={() => setCollapsed(!collapsed)}
-                    >
-                        {collapsed ? '→' : '←'}
-                    </button>
-                </div>
+            <div className="sidebar-header d-flex justify-content-center align-items-center p-3  border-bottom border-dark">
+    {!collapsed && <h2 className="text-gradient m-0 fw-bold text-center">MyApp</h2>}
+</div>
+
                 
                 <div className="sidebar-content p-2">
                     {/* Main Menu Item */}
@@ -58,20 +53,20 @@ const Layout = () => {
                             </li>
                             <li className="nav-item">
                                 <Link 
+                                    to="/tasks" 
+                                    className={`nav-link rounded py-2 ${isActive('/tasks') ? 'active' : ''}`}
+                                >
+                                    <span className="nav-icon">📄</span>
+                                    {!collapsed && <span className="ms-3">✅ Tasks</span>}
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link 
                                     to="/contacts" 
                                     className={`nav-link rounded py-2 ${isActive('/contacts') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">📇</span>
                                     {!collapsed && <span className="ms-3">Contacts Information</span>}
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link 
-                                    to="/invoices" 
-                                    className={`nav-link rounded py-2 ${isActive('/invoices') ? 'active' : ''}`}
-                                >
-                                    <span className="nav-icon">📄</span>
-                                    {!collapsed && <span className="ms-3">Invoices Balances</span>}
                                 </Link>
                             </li>
                         </ul>
