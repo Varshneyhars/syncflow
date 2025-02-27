@@ -3,11 +3,11 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const Layout = () => {
     const navigate = useNavigate();
-  
+
     const handleLogout = () => {
-      // Perform logout logic here
-      console.log("User logged out");
-      navigate("/login"); // Redirect to login page
+        // Perform logout logic here
+        console.log("User logged out");
+        navigate("/login"); // Redirect to login page
     };
     return (
         <div className="container-fluid">
