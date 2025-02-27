@@ -74,7 +74,7 @@ const Layout = () => {
                     
                     {/* Pages Section */}
                     <div className="menu-section mt-4">
-                        {!collapsed && <div className="section-title">Pages</div>}
+                        {!collapsed && <div className="section-title" >Pages</div>}
                         <ul className="nav flex-column gap-1 mt-2">
                             <li className="nav-item">
                                 <Link 
