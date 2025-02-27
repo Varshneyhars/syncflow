@@ -15,6 +15,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* Register route */}
           <Route path="/register" element={<Register />} />
+          {/* Fallback route for 404 */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
     </Router>
