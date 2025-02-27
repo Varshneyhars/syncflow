@@ -1,41 +1,78 @@
-// backend/server.js
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const http = require('http');
-const socketIo = require('socket.io');
-const multer = require('multer');
+const http = require("http");
+const socketIo = require("socket.io");
+const multer = require("multer");
+const errorMiddleware = require("./middlewares/errorMiddleware");
 
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    }
+});
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-const upload = multer({ dest: 'uploads/' });
+// Setup Multer for File Uploads
+const storage = multer.diskStorage({
+    destination: "uploads/",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
+const upload = multer({ storage });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.send('File uploaded successfully');
+// File Upload Endpoint
+app.post("/upload", upload.single("file"), (req, res) => {
+    res.json({ message: "File uploaded successfully", file: req.file });
 });
 
+// MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log(err));
+}).then(() => console.log("✅ MongoDB Connected"))
+.catch((err) => {
+    console.error("❌ MongoDB Connection Failed:", err);
+    process.exit(1); // Exit on DB connection failure
+});
 
-app.use("/api/tasks", require("./routes/task"));
+// Routes
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/tasks", require("./routes/taskRoutes"));
+app.use("/api/meetings", require("./routes/meetingRoutes"));
+app.use("/api/files", require("./routes/fileRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
+app.use("/api/ai", require("./routes/aiRoutes"));
 
-io.on('connection', (socket) => {
-    console.log('New client connected');
-    socket.on('disconnect', () => {
-        console.log('Client disconnected');
+// WebSocket Connection
+io.on("connection", (socket) => {
+    console.log("🔗 New client connected");
+
+    // Handle Real-Time Task Updates
+    socket.on("taskUpdated", (task) => {
+        io.emit("updateTasks", task);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("❌ Client disconnected");
     });
 });
 
-server.listen(5000, () => console.log("Server running on port 5000"));
+// Global Error Handling Middleware
+app.use(errorMiddleware);
+
+// Start Server
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 module.exports = { server, io };
