@@ -12,7 +12,8 @@ router.get("/", taskController.getAllTasks);
 router.get("/:id", taskController.getTaskById);
 
 // Update a task
-router.put("/:id", taskController.updateTask);
+// Update only the status of a task
+router.put("/:id/status", taskController.updateTaskStatus);
 
 // Delete a task
 router.delete("/:id", taskController.deleteTask);
