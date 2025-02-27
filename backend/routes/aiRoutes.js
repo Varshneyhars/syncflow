@@ -9,10 +9,22 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 router.post("/summary", async (req, res) => {
     try {
         const { taskDescription } = req.body;
-        const response = await genAI.generateText(taskDescription);
-        res.json({ summary: response.text() });
+
+        if (!taskDescription) {
+            return res.status(400).json({ error: "Task description is required" });
+        }
+
+        // ✅ Correct API call using Gemini model
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-001" });
+
+        const result = await model.generateContent(taskDescription);
+        const response = await result.response;
+        const summary = response.candidates?.[0]?.content?.parts?.[0]?.text || "No summary generated.";
+
+        res.json({ summary });
     } catch (error) {
-        res.status(500).json({ error: "Error generating AI summary" });
+        console.error("AI API Error:", error);
+        res.status(500).json({ error: "Error generating AI summary", details: error.message });
     }
 });
 
