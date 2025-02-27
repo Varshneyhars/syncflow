@@ -112,16 +112,16 @@ function Login() {
                 LOGIN WITH AUTH0
               </button>
 
-              <a href="#" className="forgot-password">
+              {/* <a href="#" className="forgot-password">
                 Forgot password?
-              </a>
+              </a> */}
               <p className="register">
                 Don't have an account?{" "}
                 <a
-                  href="#"
+                  href=""
                   onClick={(e) => {
                     e.preventDefault();
-                    loginWithRedirect({ screen_hint: "signup" });
+                    navigate("/register");
                   }}
                 >
                   Register here
