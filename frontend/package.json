@@ -25,6 +25,7 @@
     "axios": "^1.8.1",
     "formik": "^2.4.6",
     "frontend": "file:",
+    "lucide-react": "^0.476.0",
     "mdb-react-ui-kit": "^9.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
