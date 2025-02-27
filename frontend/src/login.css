@@ -10,7 +10,8 @@
 /* Main login card */
 .login-card {
   display: flex;
-  width: 900px;
+  width: 70%;
+  height: 90%;
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
