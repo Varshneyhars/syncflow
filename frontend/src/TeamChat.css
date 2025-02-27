@@ -20,7 +20,7 @@
 .chat-main-card {
   width: 100%;
   max-width: 900px;
-  height: 80vh;
+  height: calc(80vh - 50px); /* Adjust height to leave space for footer */
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.5s ease;
@@ -113,6 +113,18 @@
   opacity: 0.5;
 }
 
+/* Sticky Footer */
+.sticky-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -156,10 +168,15 @@
   }
   
   .messages-wrapper {
-    height: calc(90vh - 132px);
+    height: calc(90vh - 50px); /* Adjust for footer */
   }
   
   .message-item {
     max-width: 85%;
+  }
+
+  /* Adjust sticky footer on smaller screens */
+  .sticky-footer {
+    padding: 5px;
   }
 }
