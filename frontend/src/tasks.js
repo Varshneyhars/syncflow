@@ -11,6 +11,24 @@ const Tasks = () => {
     { id: 4, title: "Fix Bug in Login Module", status: "Pending", dueDate: "2023-10-18" },
   ];
 
+  // Handle Mark Complete with Confirmation
+  const handleMarkComplete = (taskId) => {
+    const confirmAction = window.confirm("Are you sure you want to mark this task as complete?");
+    if (confirmAction) {
+      console.log(`Task ${taskId} marked as complete`);
+      // Add logic here to update task status
+    }
+  };
+
+  // Handle Delete with Confirmation
+  const handleDeleteTask = (taskId) => {
+    const confirmAction = window.confirm("Are you sure you want to delete this task?");
+    if (confirmAction) {
+      console.log(`Task ${taskId} deleted`);
+      // Add logic here to delete task
+    }
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Your Tasks</h1>
@@ -52,10 +70,14 @@ const Tasks = () => {
                 <button
                   className="btn btn-sm btn-outline-success"
                   disabled={task.status === "Completed"}
+                  onClick={() => handleMarkComplete(task.id)}
                 >
                   <CheckCircle size={16} className="me-1" /> Mark Complete
                 </button>
-                <button className="btn btn-sm btn-outline-danger">
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={() => handleDeleteTask(task.id)}
+                >
                   <Trash2 size={16} className="me-1" /> Delete
                 </button>
               </div>
