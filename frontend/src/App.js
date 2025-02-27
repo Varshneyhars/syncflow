@@ -15,17 +15,18 @@ function App() {
       domain="dev-eil3josjqvxzmmlu.us.auth0.com"
       clientId="Nq86PXPBGpXJ7ylA3jykB5kPZZbQ3gMT"
       authorizationParams={{
-        redirect_uri: window.location.origin,
+        redirect_uri: `${window.location.origin}/dashboard`, // ✅ Fixed syntax
       }}
     >
+
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/"element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/add-task" element={<AddTask />} />
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
-            
+
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
