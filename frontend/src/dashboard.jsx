@@ -184,7 +184,7 @@ const Layout = () => {
         return (
             <div className="dashboard">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h2 className="h4">Analytics Dashboard</h2>
+                    
                     <div className="d-flex align-items-center">
                         <select className="form-select me-3" value={selectedUser} onChange={handleUserChange}>
                             <option value="User1">User 1</option>
