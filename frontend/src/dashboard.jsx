@@ -6,7 +6,7 @@ function Dashboard() {
   const user = {
     photo: "https://via.placeholder.com/150",
     name: "John Doe",
-    role: "Software Engineer",
+    role: "Software ",
     employeeId: "EMP12345",
   };
 

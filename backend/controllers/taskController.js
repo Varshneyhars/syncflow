@@ -44,19 +44,41 @@ exports.getTaskById = async (req, res) => {
 };
 
 // Update a task
-exports.updateTask = async (req, res) => {
+exports.updateTaskStatus = async (req, res) => {
     try {
-        const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { id } = req.params;
+        const { status } = req.body;
 
-        if (!updatedTask) return res.status(404).json({ error: "Task not found" });
+        // Validate if status is provided
+        if (!status) {
+            return res.status(400).json({ error: "Status is required" });
+        }
 
-        res.json(updatedTask);
+        // Validate allowed status values
+        const validStatuses = ["Pending", "In Progress", "Completed"];
+        if (!validStatuses.includes(status)) {
+            return res.status(400).json({ error: "Invalid status value" });
+        }
+
+        // Validate if ID is valid ObjectId
+        const mongoose = require("mongoose");
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Invalid Task ID" });
+        }
+
+        // Find and update task status
+        const task = await Task.findByIdAndUpdate(id, { status }, { new: true });
+
+        if (!task) {
+            return res.status(404).json({ error: "Task not found in database" });
+        }
+
+        res.json({ message: "Task status updated successfully", task });
     } catch (error) {
-        console.error("🔥 Error updating task:", error.message);
-        res.status(500).json({ error: "Server error" });
+        console.error("Error updating task status:", error);
+        res.status(500).json({ error: "Error updating task status" });
     }
 };
-
 // Delete a task
 exports.deleteTask = async (req, res) => {
     try {
