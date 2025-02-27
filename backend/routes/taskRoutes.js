@@ -1,9 +1,8 @@
 const express = require("express");
-const { register, login } = require("../controllers/authController");
-
+const { getAllTasks } = require("../controllers/taskController");
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
+// Route to fetch all tasks
+router.get("/", getAllTasks);
 
 module.exports = router;

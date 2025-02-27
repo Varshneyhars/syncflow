@@ -1,22 +1,12 @@
-const Task = require("../models/Task");
-
-// Create a Task
-exports.createTask = async (req, res) => {
-    try {
-        const task = new Task(req.body);
-        await task.save();
-        res.status(201).json(task);
-    } catch (error) {
-        res.status(500).json({ error: "Error creating task" });
-    }
-};
-
-// Get All Tasks
 exports.getAllTasks = async (req, res) => {
     try {
-        const tasks = await Task.find().populate("assignedTo", "name email");
+        // Add a test task (Run once)
+        await Task.create({ title: "Test Task", description: "This is a test task", status: "pending" });
+
+        const tasks = await Task.find();
         res.json(tasks);
     } catch (error) {
-        res.status(500).json({ error: "Error fetching tasks" });
+        console.error("Error fetching tasks:", error);
+        res.status(500).json({ error: "Server error" });
     }
 };
