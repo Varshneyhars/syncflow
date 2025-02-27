@@ -5,9 +5,9 @@ import Login from './login';
 import Register from './register';
 import Dashboard from './dashboard';
 import Layout from './components/Layout';
-import './App.css';
 import Tasks from "./tasks";
-import AddTask from "./AddTask";
+import TeamChat from "./TeamChat"; // ✅ Import the TeamChat component
+import './App.css';
 
 function App() {
   return (
@@ -15,32 +15,25 @@ function App() {
       domain="dev-eil3josjqvxzmmlu.us.auth0.com"
       clientId="Nq86PXPBGpXJ7ylA3jykB5kPZZbQ3gMT"
       authorizationParams={{
-        redirect_uri: `${window.location.origin}/dashboard`, // ✅ Fixed syntax
+        redirect_uri: `${window.location.origin}/dashboard`,
       }}
     >
-
       <Router>
         <div className="App">
           <Routes>
-            {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
-
-
-            {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            {/* Private Routes with Layout */}
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="tasks" element={<Tasks />} />
             </Route>
-
-            {/* Fallback route for 404 */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
-        </div>
 
+          {/* ✅ Floating Chat Component (Visible Everywhere) */}
+          <TeamChat />
+        </div>
       </Router>
     </Auth0Provider>
   );
