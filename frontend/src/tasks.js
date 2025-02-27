@@ -7,6 +7,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [summaries, setSummaries] = useState({}); // Store summaries for each task
 
   useEffect(() => {
     fetchTasks();
@@ -50,6 +51,22 @@ const Tasks = () => {
     }
   };
 
+  const handleGenerateSummary = async (taskId, taskTitle) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/ai/summary", {
+        taskDescription: taskTitle,
+      });
+
+      setSummaries((prevSummaries) => ({
+        ...prevSummaries,
+        [taskId]: response.data.summary, // Store summary for the task
+      }));
+    } catch (err) {
+      console.error("Error generating summary:", err);
+      setError("Failed to generate summary.");
+    }
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Your Tasks</h1>
@@ -88,10 +105,19 @@ const Tasks = () => {
                   <p className="card-text">
                     <strong>Due Date:</strong> {task.dueDate}
                   </p>
+                  
+                  {summaries[task._id] && (
+                    <div className="alert alert-info mt-2">
+                      <strong>Summary:</strong> {summaries[task._id]}
+                    </div>
+                  )}
                 </div>
                 
                 <div className="card-footer bg-transparent d-flex flex-column align-items-center gap-2">
-                  <button className="btn btn-sm btn-outline-info w-100">
+                  <button
+                    className="btn btn-sm btn-outline-info w-100"
+                    onClick={() => handleGenerateSummary(task._id, task.title)}
+                  >
                     <FileText size={16} className="me-1" /> Generate Summary
                   </button>
                   <button
