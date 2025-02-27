@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { Auth0Provider } from '@auth0/auth0-react';
 import Login from './login';
 import Register from './register'; 
-import Dashboard from './dashboard'; // Import the Dashboard component
+import Dashboard from './dashboard';
+import Layout from './components/Layout'; // Import Layout component
 import './App.css';
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             {/* Register route */}
             <Route path="/register" element={<Register />} />
-            {/* Dashboard route */}
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* Dashboard inside Layout */}
+            <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
             {/* Fallback route for 404 */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>

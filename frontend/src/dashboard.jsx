@@ -1,50 +1,45 @@
 import React from "react";
-import "./dashboard.css"; // Import the CSS file
+import Layout from "./components/Layout";
 
-function Dashboard() {
-  // Dummy user data
-  const user = {
-    photo: "https://via.placeholder.com/150",
-    name: "John Doe",
-    role: "Software Engineer",
-    employeeId: "EMP12345",
-  };
-
-  // Dummy work data
-  const workStats = {
-    progressReport: "75% Completed",
-    pendingWork: "3 Tasks Pending",
-    newWork: "2 New Assignments",
-  };
-
+const Dashboard = () => {
   return (
-    <div className="dashboard-container">
-      {/* User Profile Section */}
-      <div className="profile-section">
-        <img src={user.photo} alt="User Profile" className="profile-photo" />
-        <h2>{user.name}</h2>
-        <p><strong>Role:</strong> {user.role}</p>
-        <p><strong>Employee ID:</strong> {user.employeeId}</p>
-      </div>
+    <Layout>
+      <div className="container mt-4">
+        <h1 className="mb-4">Dashboard</h1>
+        <p className="lead">Welcome to the modern dashboard!</p>
 
-      {/* Work Status Section */}
-      <div className="work-section">
-        <h2>Work Summary</h2>
-        <div className="work-card">
-          <h3>Progress Report</h3>
-          <p>{workStats.progressReport}</p>
-        </div>
-        <div className="work-card pending">
-          <h3>Pending Work</h3>
-          <p>{workStats.pendingWork}</p>
-        </div>
-        <div className="work-card new">
-          <h3>New Work</h3>
-          <p>{workStats.newWork}</p>
+        {/* Dashboard Cards */}
+        <div className="row">
+          <div className="col-md-4">
+            <div className="card text-white bg-primary mb-3">
+              <div className="card-body">
+                <h5 className="card-title">Progress Report</h5>
+                <p className="card-text">75% Completed</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card text-white bg-warning mb-3">
+              <div className="card-body">
+                <h5 className="card-title">Pending Work</h5>
+                <p className="card-text">3 Tasks Pending</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card text-white bg-success mb-3">
+              <div className="card-body">
+                <h5 className="card-title">New Assignments</h5>
+                <p className="card-text">2 New Assignments</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
-}
+};
 
 export default Dashboard;
