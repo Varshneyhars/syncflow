@@ -1,7 +1,32 @@
-import React from "react";
-import "./login.css"; // Importing CSS file
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Ensure Link is imported correctly
+import './login.css';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const validateEmail = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError('Please enter a valid email address.');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!emailError && email !== '' && password !== '') {
+      alert('Login successful!');
+    } else {
+      alert('Please enter valid credentials.');
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -16,14 +41,31 @@ function Login() {
             <span className="icon">🟧</span> <h1>Logo</h1>
           </div>
           <h2>Sign into your account</h2>
-          <form>
-            <input type="email" placeholder="Email address" required />
-            <input type="password" placeholder="Password" required />
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={validateEmail}
+              required
+            />
+            {emailError && <p className="error-message">{emailError}</p>}
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
             <button type="submit">LOGIN</button>
           </form>
-          <a href="#" className="forgot-password">Forgot password?</a>
+          <a href="#" className="forgot-password">
+            Forgot password?
+          </a>
           <p className="register">
-            Don't have an account? <a href="#">Register here</a>
+            Don't have an account? <Link to="/register">Register here</Link>
           </p>
           <div className="terms">
             <a href="#">Terms of use</a> | <a href="#">Privacy policy</a>
