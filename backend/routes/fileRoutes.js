@@ -1,24 +1,29 @@
 const express = require("express");
 const multer = require("multer");
-const File = require("../models/File");
+const path = require("path");
+const fs = require("fs");
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/" });
 
-// Upload a File
-router.post("/upload", upload.single("file"), async (req, res) => {
-    try {
-        const file = new File({
-            filename: req.file.originalname,
-            fileUrl: `/uploads/${req.file.filename}`,
-            uploadedBy: req.body.userId
-        });
+// Remove the duplicate Multer setup since we're centralizing file uploads in the main server file
+// This route will handle other file operations, but not uploads
 
-        await file.save();
-        res.status(201).json(file);
-    } catch (error) {
-        res.status(500).json({ error: "Error uploading file" });
-    }
+// Get file list
+router.get("/", (req, res) => {
+    // Implementation for listing files
+    res.status(200).json({ message: "File list endpoint" });
+});
+
+// Get file by ID
+router.get("/:id", (req, res) => {
+    // Implementation for getting a single file
+    res.status(200).json({ message: `File ${req.params.id} details` });
+});
+
+// Delete file
+router.delete("/:id", (req, res) => {
+    // Implementation for deleting a file
+    res.status(200).json({ message: `File ${req.params.id} deleted` });
 });
 
 module.exports = router;
