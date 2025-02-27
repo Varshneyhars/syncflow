@@ -1,145 +1,70 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { CheckCircle, Trash2, PlusCircle } from "lucide-react";
+import { Link } from "react-router-dom"; // Ensure React Router is installed
 
-const AddTask = () => {
-  const navigate = useNavigate();
-  const [task, setTask] = useState({
-    title: "",
-    description: "",
-    assignedTo: "",
-    dueDate: "",
-    status: "Pending",
-  });
-
-  const handleChange = (e) => {
-    setTask({ ...task, [e.target.name]: e.target.value });
-  };
-
-  const handleStatusChange = (status) => {
-    setTask({ ...task, status });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("New Task:", task);
-    navigate("/"); // Redirect back to tasks page after submission
-  };
+const Tasks = () => {
+  // Sample tasks data
+  const tasks = [
+    { id: 1, title: "Complete Project Proposal", status: "Pending", dueDate: "2023-10-15" },
+    { id: 2, title: "Review Design Mockups", status: "In Progress", dueDate: "2023-10-17" },
+    { id: 3, title: "Prepare Presentation Slides", status: "Completed", dueDate: "2023-10-20" },
+    { id: 4, title: "Fix Bug in Login Module", status: "Pending", dueDate: "2023-10-18" },
+  ];
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: "#f8f9fa", padding: "20px" }}
-    >
-      {/* Main Box */}
-      <div className="card shadow-lg border-0 p-4" style={{ width: "600px", backgroundColor: "#fff" }}>
-        {/* Broad Header */}
-        <div
-          className="fw-bold text-uppercase p-3 text-white text-center rounded"
-          style={{ backgroundColor: "#007bff", fontSize: "24px", width: "100%" }}
-        >
-          New Task
-        </div>
+    <div className="container mt-4">
+      <h1 className="mb-4">Your Tasks</h1>
+      <p className="lead">Manage and track your tasks efficiently.</p>
 
-        {/* Task Form */}
-        <div className="p-3">
-          <form onSubmit={handleSubmit}>
-            {/* Title */}
-            <div className="mb-3">
-              <label className="form-label fw-semibold">Title</label>
-              <input
-                type="text"
-                className="form-control p-2"
-                name="title"
-                value={task.title}
-                onChange={handleChange}
-                placeholder="Enter task title"
-                required
-              />
-            </div>
+      {/* Add Task Button */}
+      <div className="text-center mt-4">
+        <Link to="/add-task" className="btn btn-primary">
+          <PlusCircle size={18} className="me-2" /> Add Task
+        </Link>
+      </div>
 
-            {/* Description */}
-            <div className="mb-3">
-              <label className="form-label fw-semibold">Description</label>
-              <textarea
-                className="form-control p-2"
-                name="description"
-                value={task.description}
-                onChange={handleChange}
-                rows="3"
-                placeholder="Enter task details"
-                required
-              ></textarea>
-            </div>
-
-            {/* Assigned To */}
-            <div className="mb-3">
-              <label className="form-label fw-semibold">Assigned To</label>
-              <input
-                type="text"
-                className="form-control p-2"
-                name="assignedTo"
-                value={task.assignedTo}
-                onChange={handleChange}
-                placeholder="Enter assignee's name"
-                required
-              />
-            </div>
-
-            {/* Due Date */}
-            <div className="mb-3">
-              <label className="form-label fw-semibold">Due Date</label>
-              <input
-                type="date"
-                className="form-control p-2"
-                name="dueDate"
-                value={task.dueDate}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            {/* Status Selection */}
-            <div className="mb-3">
-              <label className="form-label fw-semibold d-block">Status</label>
-              <div className="d-flex gap-2">
+      {/* Task Cards */}
+      <div className="row">
+        {tasks.map((task) => (
+          <div className="col-md-6 col-lg-4 mb-4" key={task.id}>
+            <div className="card h-100 shadow-sm border-0">
+              <div className="card-body">
+                <h5 className="card-title">{task.title}</h5>
+                <p className="card-text">
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`badge px-3 py-2 ${
+                      task.status === "Completed"
+                        ? "bg-success"
+                        : task.status === "In Progress"
+                        ? "bg-warning text-dark"
+                        : "bg-danger"
+                    }`}
+                  >
+                    {task.status}
+                  </span>
+                </p>
+                <p className="card-text">
+                  <strong>Due Date:</strong> {task.dueDate}
+                </p>
+              </div>
+              <div className="card-footer bg-transparent d-flex justify-content-between">
                 <button
-                  type="button"
-                  className={`btn w-100 ${task.status === "Pending" ? "btn-danger text-white" : "btn-outline-danger"}`}
-                  onClick={() => handleStatusChange("Pending")}
+                  className="btn btn-sm btn-outline-success"
+                  disabled={task.status === "Completed"}
                 >
-                  Pending
+                  <CheckCircle size={16} className="me-1" /> Mark Complete
                 </button>
-                <button
-                  type="button"
-                  className={`btn w-100 ${task.status === "In Progress" ? "btn-warning text-dark" : "btn-outline-warning text-dark"}`}
-                  onClick={() => handleStatusChange("In Progress")}
-                >
-                  In Progress
-                </button>
-                <button
-                  type="button"
-                  className={`btn w-100 ${task.status === "Completed" ? "btn-success text-white" : "btn-outline-success"}`}
-                  onClick={() => handleStatusChange("Completed")}
-                >
-                  Completed
+                <button className="btn btn-sm btn-outline-danger">
+                  <Trash2 size={16} className="me-1" /> Delete
                 </button>
               </div>
             </div>
-
-            {/* Submit & Cancel Buttons */}
-            <div className="d-flex justify-content-between mt-4">
-              <button type="submit" className="btn btn-primary px-4">
-                Submit Task
-              </button>
-              <button type="button" className="btn btn-secondary px-4" onClick={() => navigate("/")}>
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default AddTask;
+export default Tasks;
