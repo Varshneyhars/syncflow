@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import Login from './login';
-import HeroPage from './pages/HeroPage';
+// import HeroPage from './pages/HeroPage';
 import Register from './register'; // Import the Register component
 import './App.css';
 
@@ -29,7 +29,7 @@ function App() {
         </Routes>
         </div>
       <div className="App">
-      <HeroPage />
+      {/* <HeroPage /> */}
     </div>
       </Router>
     </Auth0Provider>
