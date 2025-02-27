@@ -4,7 +4,7 @@ import '../styles/hero.css';
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <div className="navbar-brand">ChronoTask</div>
+      <div className="navbar-brand">SyncFlow</div>
       <div className="nav-links">
         <a href="/features">Features</a>
         <a href="/solutions">Solutions</a>
