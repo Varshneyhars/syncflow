@@ -4,9 +4,10 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import Login from './login';
 import Register from './register';
 import Dashboard from './dashboard';
-import Tasks from './tasks';
 import Layout from './components/Layout';
 import './App.css';
+import Tasks from "./tasks";
+import AddTask from "./AddTask";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
+            <Route path="/" element={<Tasks />} />
+            <Route path="/add-task" element={<AddTask />} />
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
             
