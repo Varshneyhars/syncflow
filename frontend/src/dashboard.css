@@ -73,3 +73,44 @@
     border-left: 5px solid #007bff;
   }
   
+  /* Bento Grid Styles */
+.bento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bento-row {
+  display: flex;
+  gap: 10px;
+}
+
+.bento-box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bento-box h5 {
+  margin-bottom: 10px;
+}
+
+.bento-box p {
+  margin: 0;
+}
+
+/* Adjust box sizes for a Bento-like layout */
+.bento-row:first-child .bento-box {
+  height: 150px;
+}
+
+.bento-row:last-child .bento-box {
+  height: 100px;
+}
+
+.bento-row:last-child .bento-box:first-child {
+  flex: 2; /* Make the first box in the second row larger */
+}
