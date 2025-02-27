@@ -21,7 +21,7 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Tasks />} />
+            <Route path="/"element={<Navigate to="/login" replace />} />
             <Route path="/add-task" element={<AddTask />} />
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
