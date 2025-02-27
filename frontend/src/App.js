@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './login';
+import HeroPage from './pages/HeroPage';
 import './App.css';
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>
+      <div className="App">
+      <HeroPage />
+    </div>
     </Router>
   );
 }
