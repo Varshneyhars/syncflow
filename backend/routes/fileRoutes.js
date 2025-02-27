@@ -5,43 +5,25 @@ const fs = require("fs");
 
 const router = express.Router();
 
-// Ensure "uploads/" directory exists
-const uploadDir = "./uploads";
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
+// Remove the duplicate Multer setup since we're centralizing file uploads in the main server file
+// This route will handle other file operations, but not uploads
 
-// Configure Multer Storage
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
+// Get file list
+router.get("/", (req, res) => {
+    // Implementation for listing files
+    res.status(200).json({ message: "File list endpoint" });
 });
 
-const upload = multer({ storage });
+// Get file by ID
+router.get("/:id", (req, res) => {
+    // Implementation for getting a single file
+    res.status(200).json({ message: `File ${req.params.id} details` });
+});
 
-// Upload a File
-router.post("/upload", upload.single("file"), (req, res) => {
-    console.log("Received Upload Request");
-    console.log("Headers:", req.headers);
-    console.log("Body:", req.body);
-
-    if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-    }
-
-    // Prepare the response object
-    const fileDetails = {
-        filename: req.file.originalname,
-        fileUrl: `/uploads/${req.file.filename}`,
-        uploadedBy: req.body.userId || "Unknown",
-    };
-
-    // Return the file details in the response
-    res.status(201).json({ message: "File uploaded successfully", file: fileDetails });
+// Delete file
+router.delete("/:id", (req, res) => {
+    // Implementation for deleting a file
+    res.status(200).json({ message: `File ${req.params.id} deleted` });
 });
 
 module.exports = router;
