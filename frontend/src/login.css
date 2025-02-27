@@ -111,3 +111,11 @@ button:hover {
   text-decoration: none;
   margin: 0 5px;
 }
+
+/* Error message for invalid email */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
