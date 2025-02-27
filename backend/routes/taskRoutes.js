@@ -1,27 +1,9 @@
 const express = require("express");
-const { createTask, getAllTasks } = require("../controllers/taskController");
-const { authMiddleware, roleMiddleware } = require("../middlewares/authMiddleware");
+const { register, login } = require("../controllers/authController");
+
 const router = express.Router();
 
-// Create a Task
-router.post("/", async (req, res) => {
-    try {
-        const task = new Task(req.body);
-        await task.save();
-        res.status(201).json(task);
-    } catch (error) {
-        res.status(500).json({ error: "Error creating task" });
-    }
-});
-
-// Get All Tasks
-router.get("/", async (req, res) => {
-    try {
-        const tasks = await Task.find().populate("assignedTo", "name email");
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ error: "Error fetching tasks" });
-    }
-});
+router.post("/register", register);
+router.post("/login", login);
 
 module.exports = router;
