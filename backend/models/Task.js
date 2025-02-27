@@ -7,9 +7,9 @@ const TaskSchema = new mongoose.Schema({
     assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },
     priority: { type: String, enum: ["Low", "Medium", "High"], default: "Medium" },
-    dueDate: { type: Date },
+    dueDate: { type: Date,default: Date.now },
     createdAt: { type: Date, default: Date.now },
-    attachments: [{ type: String }] // Add this line
+     attachments: [{ type: String }] // Add this line
 });
 
 TaskSchema.post('save', function(doc) {
