@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import './App.css';
 import Tasks from "./tasks";
 import AddTask from "./AddTask";
+import TeamChat from "./TeamChat";  // Add this import
 
 function App() {
   return (
@@ -18,13 +19,11 @@ function App() {
         redirect_uri: `${window.location.origin}/dashboard`, // ✅ Fixed syntax
       }}
     >
-
       <Router>
         <div className="App">
           <Routes>
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
-
 
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
@@ -34,13 +33,13 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="tasks" element={<Tasks />} />
+              <Route path="team-chat" element={<TeamChat />} /> {/* New Route for Team Chat */}
             </Route>
 
             {/* Fallback route for 404 */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>
-
       </Router>
     </Auth0Provider>
   );

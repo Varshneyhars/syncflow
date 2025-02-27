@@ -5,31 +5,31 @@ const Layout = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
-    
+
     const handleLogout = () => {
         console.log("User logged out");
         navigate("/login");
     };
-    
+
     const isActive = (path) => {
         return location.pathname === path;
     };
-    
+
     return (
         <div className="d-flex vh-100">
             {/* Sidebar */}
             <nav className={`sidebar bg-dark-navy transition-all ${collapsed ? 'collapsed' : ''}`}>
-            <div className="sidebar-header d-flex justify-content-center align-items-center p-3  border-bottom border-dark">
-    {!collapsed && <h2 className="text-gradient m-0 fw-bold text-center">MyApp</h2>}
-</div>
+                <div className="sidebar-header d-flex justify-content-center align-items-center p-3  border-bottom border-dark">
+                    {!collapsed && <h2 className="text-gradient m-0 fw-bold text-center">MyApp</h2>}
+                </div>
 
-                
+
                 <div className="sidebar-content p-2">
                     {/* Main Menu Item */}
                     <ul className="nav flex-column gap-1 mt-3">
                         <li className="nav-item">
-                            <Link 
-                                to="/dashboard" 
+                            <Link
+                                to="/dashboard"
                                 className={`nav-link rounded py-2 ${isActive('/dashboard') ? 'active' : ''}`}
                             >
                                 <span className="nav-icon">🏠</span>
@@ -37,14 +37,14 @@ const Layout = () => {
                             </Link>
                         </li>
                     </ul>
-                    
+
                     {/* Data Section */}
                     <div className="menu-section mt-4">
-                        {!collapsed && <div className="section-title">Data</div>}
+                        {/* {!collapsed && <div className="section-title"></div>} */}
                         <ul className="nav flex-column gap-1 mt-2">
                             <li className="nav-item">
-                                <Link 
-                                    to="/manage-team" 
+                                <Link
+                                    to="/manage-team"
                                     className={`nav-link rounded py-2 ${isActive('/manage-team') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">👥</span>
@@ -52,15 +52,25 @@ const Layout = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link 
-                                    to="/tasks" 
+                                <Link
+                                    to="/tasks"
                                     className={`nav-link rounded py-2 ${isActive('/tasks') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">📄</span>
                                     {!collapsed && <span className="ms-3">✅ Tasks</span>}
                                 </Link>
                             </li>
+                            {/* New Team Chat Button */}
                             <li className="nav-item">
+                                <Link
+                                    to="/team-chat"
+                                    className={`nav-link rounded py-2 ${isActive('/team-chat') ? 'active' : ''}`}
+                                >
+                                    <span className="nav-icon">💬</span>
+                                    {!collapsed && <span className="ms-3">Team Chat</span>}
+                                </Link>
+                            </li>
+                            {/* <li className="nav-item">
                                 <Link 
                                     to="/contacts" 
                                     className={`nav-link rounded py-2 ${isActive('/contacts') ? 'active' : ''}`}
@@ -68,15 +78,15 @@ const Layout = () => {
                                     <span className="nav-icon">📇</span>
                                     {!collapsed && <span className="ms-3">Contacts Information</span>}
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
-                    
+
                     {/* Pages Section */}
                     <div className="menu-section mt-4">
-                        {!collapsed && <div className="section-title" >Pages</div>}
+                        {/* {!collapsed && <div className="section-title" >Pages</div>} */}
                         <ul className="nav flex-column gap-1 mt-2">
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link 
                                     to="/profile" 
                                     className={`nav-link rounded py-2 ${isActive('/profile') ? 'active' : ''}`}
@@ -84,10 +94,10 @@ const Layout = () => {
                                     <span className="nav-icon">👤</span>
                                     {!collapsed && <span className="ms-3">Profile Form</span>}
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
-                                <Link 
-                                    to="/calendar" 
+                                <Link
+                                    to="/calendar"
                                     className={`nav-link rounded py-2 ${isActive('/calendar') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">📅</span>
@@ -95,8 +105,8 @@ const Layout = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link 
-                                    to="/faq" 
+                                <Link
+                                    to="/faq"
                                     className={`nav-link rounded py-2 ${isActive('/faq') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">❓</span>
@@ -105,20 +115,20 @@ const Layout = () => {
                             </li>
                         </ul>
                     </div>
-                    
+
                     {/* Charts Section */}
-                    
+
                 </div>
-                
+
                 <div className="sidebar-footer mt-auto p-3 border-top border-dark">
-                    {!collapsed && 
+                    {!collapsed &&
                         <div className="d-grid">
                             <button className="btn btn-danger" onClick={handleLogout}>
                                 <span className="nav-icon">🚪</span> Logout
                             </button>
                         </div>
                     }
-                    {collapsed && 
+                    {collapsed &&
                         <div className="d-flex justify-content-center">
                             <button className="btn btn-sm btn-danger p-2" onClick={handleLogout}>
                                 🚪
@@ -127,7 +137,7 @@ const Layout = () => {
                     }
                 </div>
             </nav>
-            
+
             {/* Main Content */}
             <div className="main-content flex-grow-1 bg-light d-flex flex-column overflow-hidden">
                 {/* Top Navbar */}
@@ -147,18 +157,18 @@ const Layout = () => {
                             </button>
                         </div>
                         <div className="dropdown">
-                            <button 
-                                className="btn dropdown-toggle d-flex align-items-center gap-2" 
-                                type="button" 
-                                id="userDropdown" 
-                                data-bs-toggle="dropdown" 
+                            <button
+                                className="btn dropdown-toggle d-flex align-items-center gap-2"
+                                type="button"
+                                id="userDropdown"
+                                data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
                                 <div className="avatar-container">
-                                    <img 
-                                        src="https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png" 
-                                        alt="User" 
-                                        className="user-avatar" 
+                                    <img
+                                        src="https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png"
+                                        alt="User"
+                                        className="user-avatar"
                                     />
                                 </div>
                                 <span className="fw-medium d-none d-md-block">Alex Johnson</span>
@@ -181,13 +191,13 @@ const Layout = () => {
                         </div>
                     </div>
                 </nav>
-                
+
                 {/* Page Content */}
                 <div className="content p-4 overflow-auto">
                     <Outlet />
                 </div>
             </div>
-            
+
             {/* CSS */}
             <style jsx>{`
                 :root {

@@ -29,7 +29,7 @@ const Tasks = () => {
     const confirmAction = window.confirm("Are you sure you want to mark this task as complete?");
     if (confirmAction) {
       try {
-        await axios.put(`http://localhost:5000/api/tasks/${taskId}`, { status: "completed" });
+        await axios.put(`http://localhost:5000/api/tasks/${taskId}/status`, { status: "Completed" });
         fetchTasks();
       } catch (err) {
         console.error("Error marking task as complete:", err);
@@ -94,16 +94,16 @@ const Tasks = () => {
                   <p className="card-text">
                     <strong>Status:</strong>{" "}
                     <span
-                      className={`badge px-3 py-2 ${
-                        task.status === "completed"
+                      className={`badge px-3 py-2 ${task.status === "completed"
                           ? "bg-success"
                           : task.status === "in-progress"
-                          ? "bg-warning text-dark"
-                          : "bg-danger"
-                      }`}
+                            ? "bg-info text-white"
+                            : "bg-warning text-dark"
+                        }`}
                     >
                       {task.status}
                     </span>
+
                   </p>
                   <p className="card-text">
                     <strong>Due Date:</strong> {task.dueDate}
