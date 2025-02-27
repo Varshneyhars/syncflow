@@ -17,18 +17,22 @@ const io = socketIo(server, {
     }
 });
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+// Setup Multer for File Uploads
+// const storage = multer.diskStorage({
+//     destination: "uploads/",
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + "-" + file.originalname);
+//     },
+// });
+// const upload = multer({ storage });
+
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-// Setup Multer for File Uploads
-const storage = multer.diskStorage({
-    destination: "uploads/",
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
-    },
-});
-const upload = multer({ storage });
+app.use(express.urlencoded({ extended: true }));
 
 // File Upload Endpoint
 app.post("/upload", upload.single("file"), (req, res) => {
@@ -45,6 +49,8 @@ mongoose.connect(process.env.MONGO_URI, {
     process.exit(1); // Exit on DB connection failure
 });
 
+
+
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
@@ -53,7 +59,8 @@ app.use("/api/meetings", require("./routes/meetingRoutes"));
 app.use("/api/files", require("./routes/fileRoutes"));
 app.use("/api/notifications", require("./routes/notificationRoutes"));
 app.use("/api/ai", require("./routes/aiRoutes"));
-
+// ✅ Serve Static Files
+app.use("/uploads", express.static("uploads"));
 // WebSocket Connection
 io.on("connection", (socket) => {
     console.log("🔗 New client connected");
