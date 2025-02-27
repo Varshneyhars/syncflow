@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import './App.css';
 import Tasks from "./tasks";
 import AddTask from "./AddTask";
+import ManageUsers from './manageusers'; // Import the ManageUsers component
 
 function App() {
   return (
@@ -21,19 +22,19 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/"element={<Navigate to="/login" replace />} />
-            <Route path="/add-task" element={<AddTask />} />
             {/* Redirect root to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />
-            
+
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
             {/* Private Routes with Layout */}
-            <Route path="/" element={<Layout />}>
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="tasks" element={<Tasks />} />
+            <Route element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/manage-users" element={<ManageUsers />} />
+              <Route path="/add-task" element={<AddTask />} />
             </Route>
 
             {/* Fallback route for 404 */}
