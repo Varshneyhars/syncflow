@@ -57,7 +57,7 @@ function Login() {
         </div>
         <div className="form-section">
           <div className="logo">
-            <span className="icon">🟧</span> <h1>Logo</h1>
+            <span className="icon">🟧</span> <h1>SyncFlow</h1>
           </div>
 
           {/* Loading State */}
