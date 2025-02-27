@@ -7,7 +7,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [summaries, setSummaries] = useState({}); // Store summaries for each task
+  const [summaries, setSummaries] = useState({});
 
   useEffect(() => {
     fetchTasks();
@@ -59,7 +59,7 @@ const Tasks = () => {
 
       setSummaries((prevSummaries) => ({
         ...prevSummaries,
-        [taskId]: response.data.summary, // Store summary for the task
+        [taskId]: response.data.summary,
       }));
     } catch (err) {
       console.error("Error generating summary:", err);
@@ -68,36 +68,39 @@ const Tasks = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4">Your Tasks</h1>
-      <p className="lead">Manage and track your tasks efficiently.</p>
+    <div className="container mt-5">
+      <h1 className="mb-4 text-center text-primary">Your Tasks</h1>
+      <p className="lead text-center text-secondary">Manage and track your tasks efficiently.</p>
 
-      <div className="text-center mt-4 mb-4">
-        <Link to="/add-task" className="btn btn-primary">
-          <PlusCircle size={18} className="me-2" /> Add Task
+      {/* Add Task Button */}
+      <div className="text-center my-4">
+        <Link to="/add-task" className="btn btn-lg btn-primary shadow-sm">
+          <PlusCircle size={20} className="me-2" /> Add Task
         </Link>
       </div>
 
+      {/* Task List */}
       {loading ? (
-        <p>Loading tasks...</p>
+        <p className="text-center">Loading tasks...</p>
       ) : error ? (
-        <p className="text-danger">{error}</p>
+        <p className="text-danger text-center">{error}</p>
       ) : (
         <div className="row">
           {tasks.map((task) => (
             <div className="col-md-6 col-lg-4 mb-4" key={task._id}>
-              <div className="card h-100 shadow-sm border-0 p-3">
+              <div className="card shadow-sm border-0 rounded p-3 task-card">
                 <div className="card-body">
-                  <h5 className="card-title">{task.title}</h5>
+                  <h5 className="card-title fw-bold">{task.title}</h5>
                   <p className="card-text">
                     <strong>Status:</strong>{" "}
                     <span
-                      className={`badge px-3 py-2 ${task.status === "completed"
-                        ? "bg-success"
-                        : task.status === "in-progress"
+                      className={`badge px-3 py-2 ${
+                        task.status === "completed"
+                          ? "bg-success"
+                          : task.status === "in-progress"
                           ? "bg-warning text-dark"
                           : "bg-danger"
-                        }`}
+                      }`}
                     >
                       {task.status}
                     </span>
@@ -105,15 +108,17 @@ const Tasks = () => {
                   <p className="card-text">
                     <strong>Due Date:</strong> {task.dueDate}
                   </p>
-                  
+
+                  {/* AI-generated summary */}
                   {summaries[task._id] && (
                     <div className="alert alert-info mt-2">
                       <strong>Summary:</strong> {summaries[task._id]}
                     </div>
                   )}
                 </div>
-                
-                <div className="card-footer bg-transparent d-flex flex-column align-items-center gap-2">
+
+                {/* Buttons Section */}
+                <div className="card-footer bg-transparent d-flex flex-column gap-2">
                   <button
                     className="btn btn-sm btn-outline-info w-100"
                     onClick={() => handleGenerateSummary(task._id, task.title)}
