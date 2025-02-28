@@ -51,13 +51,13 @@ function Login() {
       <div className="login-card">
         <div className="image-section">
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+            src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?cs=srgb&dl=pexels-fotios-photos-1957477.jpg&fm=jpg"
             alt="Login"
           />
         </div>
         <div className="form-section">
           <div className="logo">
-            <span className="icon">🟧</span> <h1>SyncFlow</h1>
+            <span className="icon"></span> <h1>SyncFlow</h1>
           </div>
 
           {/* Loading State */}

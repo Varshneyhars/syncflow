@@ -8,7 +8,8 @@ import Layout from './components/Layout';
 import './App.css';
 import Tasks from "./tasks";
 import AddTask from "./AddTask";
-import TeamChat from "./TeamChat";  // Add this import
+import TeamChat from "./TeamChat";
+import ManageUsers from "./ManageUsers";  // Add this import
 
 function App() {
   return (
@@ -33,7 +34,8 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="tasks" element={<Tasks />} />
-              <Route path="team-chat" element={<TeamChat />} /> {/* New Route for Team Chat */}
+              <Route path="team-chat" element={<TeamChat />} />
+              <Route path="manage-users" element={<ManageUsers />} /> {/* New Route for Team Chat */}
             </Route>
 
             {/* Fallback route for 404 */}

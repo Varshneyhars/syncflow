@@ -44,11 +44,11 @@ const Layout = () => {
                         <ul className="nav flex-column gap-1 mt-2">
                             <li className="nav-item">
                                 <Link
-                                    to="/manage-team"
-                                    className={`nav-link rounded py-2 ${isActive('/manage-team') ? 'active' : ''}`}
+                                    to="/manage-users"
+                                    className={`nav-link rounded py-2 ${isActive('/manage-users') ? 'active' : ''}`}
                                 >
                                     <span className="nav-icon">👥</span>
-                                    {!collapsed && <span className="ms-3">Manage Team</span>}
+                                    {!collapsed && <span className="ms-3">Manage users</span>}
                                 </Link>
                             </li>
                             <li className="nav-item">
